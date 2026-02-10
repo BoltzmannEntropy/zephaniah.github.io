@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zephaniah — Jeffrey Epstein Document Search & Archive</title>
+  <meta name="description" content="Zephaniah: Search and archive declassified documents related to the Jeffrey Epstein case from FBI, DOJ, Federal Courts, and government agencies. Desktop app for macOS, Windows, and Linux.">
+  <meta property="og:title" content="Zephaniah — Jeffrey Epstein Document Search & Archive">
+  <meta property="og:description" content="Zephaniah: Search and archive declassified Jeffrey Epstein case documents from government agencies.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/01-search-documents.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f8f9fb;
+      --bg-subtle: #f1f3f6;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8f9fb;
+      --border: #e3e6eb;
+      --border-hover: #cdd2da;
+      --text: #1a1f2e;
+      --text-muted: #5a6478;
+      --text-dim: #8a94a8;
+      --accent: #4a5568;
+      --accent-dark: #3d4556;
+      --accent-mid: #6b7a8f;
+      --accent-soft: #e8ebf0;
+      --glow: rgba(74, 85, 104, 0.06);
+      --glow-soft: rgba(74, 85, 104, 0.03);
+      --surface-light: #f1f3f6;
+      --surface-warm: #f8f9fb;
+      --surface-border: #e3e6eb;
+      --text-dark: #1a1f2e;
+      --text-dark-muted: #5a6478;
+      --radius: 16px;
+      --radius-lg: 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== Nav ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 0;
+      transition: all 0.3s;
+      border-bottom: 1px solid transparent;
+      background: var(--bg);
+    }
+
+    nav.scrolled {
+      background: rgba(248, 249, 251, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom-color: var(--border);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--accent-soft);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-icon svg {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-icon-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--text-muted);
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-icon-btn:hover {
+      color: var(--text);
+      background: var(--bg-subtle);
+    }
+
+    .nav-icon-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(74, 85, 104, 0.25);
+      background: var(--accent-dark);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      padding: 140px 0 60px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-content {
+      text-align: left;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--accent-mid);
+      background: var(--accent-soft);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-dark);
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 .grad {
+      color: var(--accent);
+      -webkit-text-fill-color: var(--accent);
+      background: none;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 0 32px;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .hero-feature {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .hero-feature svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-dim);
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(74, 85, 104, 0.25);
+      background: var(--accent-dark);
+    }
+
+    .btn-primary svg { width: 18px; height: 18px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      font-size: 13px;
+      color: var(--text-dim);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Hero Desktop Mockup ===== */
+    .hero-mockup {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .desktop-frame {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 12px 12px 32px;
+      box-shadow:
+        0 60px 120px rgba(0, 0, 0, 0.2),
+        0 30px 80px rgba(0, 0, 0, 0.15);
+    }
+
+    .desktop-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+    }
+
+    .desktop-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .desktop-dot.red { background: #ff5f57; }
+    .desktop-dot.yellow { background: #ffbd2e; }
+    .desktop-dot.green { background: #28c840; }
+
+    .desktop-screen {
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .desktop-screen img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      text-align: center;
+      padding: 40px 0 20px;
+    }
+
+    .scroll-indicator span {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .scroll-indicator svg {
+      width: 24px;
+      height: 24px;
+      color: var(--text-dim);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(6px); }
+      60% { transform: translateY(3px); }
+    }
+
+    /* Legacy hero screenshot - keep for fallback */
+    .hero-screenshot {
+      position: relative;
+      max-width: 1000px;
+      margin: 56px auto 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.02),
+        0 24px 80px rgba(0, 0, 0, 0.08);
+      z-index: 1;
+    }
+
+    .hero-screenshot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ===== Sections ===== */
+    .section { padding: 120px 0; }
+    .section-dark { background: var(--bg); color: var(--text); }
+    .section-darker { background: var(--bg-subtle); color: var(--text); }
+    .section-light { background: var(--surface-light); color: var(--text); }
+    .section-warm { background: var(--surface-warm); color: var(--text); }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 64px;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .label-gradient {
+      color: var(--accent);
+    }
+
+    .section-header h2 {
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .section-header p {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* ===== Feature Cards ===== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      padding: 32px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .feature-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--accent);
+    }
+
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .feature-card .feature-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== Feature Showcase ===== */
+    .showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .showcase.reversed { direction: rtl; }
+    .showcase.reversed > * { direction: ltr; }
+
+    /* Showcase Large - full width image above text */
+    .showcase-large {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .showcase-large .showcase-mockup {
+      width: 100%;
+    }
+
+    .showcase-large .showcase-desktop {
+      max-width: 100%;
+    }
+
+    .showcase-large .showcase-text {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .showcase-large .showcase-icon {
+      margin: 0 auto 24px;
+    }
+
+    /* Showcase Compact - smaller side by side */
+    .showcase-compact {
+      gap: 60px;
+    }
+
+    .showcase-compact .showcase-desktop {
+      max-width: 400px;
+    }
+
+    .showcase-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .showcase-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    .showcase-text h3 {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .showcase-text p {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 0;
+      color: var(--text-muted);
+    }
+
+    .showcase-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    .showcase-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .showcase-bullets .bullet-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      background: var(--accent-soft);
+    }
+
+    .showcase-bullets .bullet-icon svg {
+      width: 12px;
+      height: 12px;
+      color: var(--accent);
+    }
+
+    .showcase-mockup {
+      display: flex;
+      justify-content: center;
+    }
+
+    .showcase-desktop {
+      width: 100%;
+      max-width: 520px;
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 10px 10px 24px;
+      box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.12),
+        0 16px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .showcase-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      margin-bottom: 6px;
+    }
+
+    .showcase-titlebar .desktop-dot {
+      width: 10px;
+      height: 10px;
+    }
+
+    .showcase-desktop-screen {
+      background: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .showcase-desktop-screen img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .showcase-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06);
+      transition: transform 0.4s;
+    }
+
+    .showcase-img:hover { transform: scale(1.02); }
+
+    .showcase-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ===== Specs Grid ===== */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .spec-card {
+      padding: 28px 24px;
+      background: white;
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .spec-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    }
+
+    .spec-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      background: var(--accent-soft);
+    }
+
+    .spec-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--accent);
+    }
+
+    .spec-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .spec-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== Institution Strip ===== */
+    .institution-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .institution-pill {
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .institution-pill:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+
+    .institution-pill.active {
+      background: var(--accent-soft);
+      border-color: var(--accent-mid);
+      color: var(--accent-dark);
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--text);
+      color: #ffffff;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+      color: #ffffff;
+    }
+
+    .cta-section p {
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 36px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section .hero-buttons {
+      position: relative;
+      z-index: 1;
+      justify-content: center;
+    }
+
+    .cta-section .btn-primary {
+      background: #ffffff;
+      color: var(--text);
+    }
+
+    .cta-section .btn-primary:hover {
+      box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2);
+      background: #f0f0f0;
+    }
+
+    .cta-section .btn-ghost {
+      color: rgba(255, 255, 255, 0.7);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .cta-section .btn-ghost:hover {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      background: var(--bg);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-dim);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ===== Reveal ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.35s; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .hero .container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+      .hero-content { text-align: center; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-features { justify-content: center; }
+      .hero-buttons { justify-content: center; }
+      .hero-mockup { order: -1; }
+      .desktop-frame { max-width: 550px; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .specs-grid { grid-template-columns: repeat(2, 1fr); }
+      .showcase { grid-template-columns: 1fr; gap: 48px; }
+      .showcase.reversed { direction: ltr; }
+      .showcase-text { text-align: center; }
+      .showcase-icon { margin-left: auto; margin-right: auto; }
+      .showcase-mockup { order: -1; }
+      .showcase-compact .showcase-desktop { max-width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-right { display: none; }
+      .mobile-toggle { display: block; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(248, 249, 251, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 20px 24px;
+        gap: 14px;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+      }
+
+      .hero { padding: 120px 0 40px; }
+      .section { padding: 80px 0; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .specs-grid { grid-template-columns: 1fr; }
+      .desktop-frame { max-width: 100%; }
+      .showcase-desktop { max-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .hero-buttons .btn-primary { width: 100%; justify-content: center; }
+      .hero-features { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </div>
+        Zephaniah
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#institutions">Institutions</a></li>
+        <li><a href="#specs">Specs</a></li>
+        <li><a href="https://github.com/BoltzmannEntropy/Zephaniah" target="_blank">GitHub</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="nav-icons">
+          <a href="https://github.com/BoltzmannEntropy/Zephaniah" target="_blank" class="nav-icon-btn" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+        </div>
+        <a href="#download" class="nav-cta">Download</a>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          Declassified Documents + Open Source
+        </div>
+        <h1 class="reveal reveal-d1">
+          Jeffrey Epstein<br>Documents With<br><span class="grad">Zephaniah</span>
+        </h1>
+        <p class="hero-sub reveal reveal-d2">
+          Search and archive declassified documents related to the Jeffrey Epstein case from FBI, DOJ, Federal Courts, and other government agencies.
+        </p>
+        <div class="hero-features reveal reveal-d2">
+          <span class="hero-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Privacy First
+          </span>
+          <span class="hero-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Offline Archives
+          </span>
+          <span class="hero-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Open Source
+          </span>
+        </div>
+        <div class="hero-buttons reveal reveal-d3">
+          <a href="https://github.com/BoltzmannEntropy/Zephaniah" class="btn-primary" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download on GitHub
+          </a>
+          <span class="hero-meta">macOS &bull; Windows &bull; Linux</span>
+        </div>
+      </div>
+      <div class="hero-mockup reveal reveal-d3">
+        <div class="desktop-frame">
+          <div class="desktop-titlebar">
+            <span class="desktop-dot red"></span>
+            <span class="desktop-dot yellow"></span>
+            <span class="desktop-dot green"></span>
+          </div>
+          <div class="desktop-screen">
+            <img src="images/01-search-documents.png" alt="Zephaniah - Public Document Search" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator reveal reveal-d4">
+      <span>Scroll to explore</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section section-dark" id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label label-gradient">Features</div>
+        <h2>Everything you need for research</h2>
+        <p>Search across multiple government agencies, filter by document type, and build a local archive of public records.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+          </div>
+          <h3>Multi-Source Search</h3>
+          <p class="feature-desc">Query 15+ government agencies simultaneously from a single interface.</p>
+        </div>
+        <div class="feature-card reveal reveal-d1">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <h3>Document Filters</h3>
+          <p class="feature-desc">Filter by 15+ file types including PDF, DOC, media files, and more.</p>
+        </div>
+        <div class="feature-card reveal reveal-d2">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </div>
+          <h3>Download Queue</h3>
+          <p class="feature-desc">Parallel downloads with progress tracking, auto-retry, and organization by date.</p>
+        </div>
+        <div class="feature-card reveal reveal-d3">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <h3>Snapshots</h3>
+          <p class="feature-desc">Automated daily snapshots of search results to track changes over time.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Search Showcase - Large centered layout -->
+  <section class="section section-light" id="search">
+    <div class="container">
+      <div class="showcase-large reveal">
+        <div class="showcase-mockup">
+          <div class="showcase-desktop">
+            <div class="showcase-titlebar">
+              <span class="desktop-dot red"></span>
+              <span class="desktop-dot yellow"></span>
+              <span class="desktop-dot green"></span>
+            </div>
+            <div class="showcase-desktop-screen">
+              <img src="images/01-search-documents.png" alt="Document Search Interface" loading="lazy">
+            </div>
+          </div>
+        </div>
+        <div class="showcase-text">
+          <div class="showcase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+          </div>
+          <h3>Multi-Agency Search</h3>
+          <p>Query FBI Vault, DOJ archives, Federal Court records, CIA FOIA Reading Room, and 15+ other government agencies from a single unified interface. Advanced filtering by institution category, time range, and document type.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Queue Showcase - Side by side, text left -->
+  <section class="section section-darker" id="queue">
+    <div class="container">
+      <div class="showcase showcase-compact reveal">
+        <div class="showcase-text">
+          <div class="showcase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </div>
+          <h3>Parallel Downloads</h3>
+          <p>Download multiple documents simultaneously with real-time progress tracking. Configure up to 10 concurrent downloads with automatic retry on failure. Smart queue management organizes your downloads efficiently.</p>
+        </div>
+        <div class="showcase-mockup">
+          <div class="showcase-desktop">
+            <div class="showcase-titlebar">
+              <span class="desktop-dot red"></span>
+              <span class="desktop-dot yellow"></span>
+              <span class="desktop-dot green"></span>
+            </div>
+            <div class="showcase-desktop-screen">
+              <img src="images/02-download-queue.png" alt="Download Queue" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Artifacts Showcase - Side by side, reversed -->
+  <section class="section section-warm">
+    <div class="container">
+      <div class="showcase showcase-compact reversed reveal">
+        <div class="showcase-text">
+          <div class="showcase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <h3>Document Library</h3>
+          <p>Your downloaded artifacts organized chronologically. Browse with the built-in Syncfusion PDF viewer, play audio/video with the integrated media player, and manage storage with detailed statistics and cleanup tools.</p>
+        </div>
+        <div class="showcase-mockup">
+          <div class="showcase-desktop">
+            <div class="showcase-titlebar">
+              <span class="desktop-dot red"></span>
+              <span class="desktop-dot yellow"></span>
+              <span class="desktop-dot green"></span>
+            </div>
+            <div class="showcase-desktop-screen">
+              <img src="images/03-artifacts.png" alt="Artifact Management" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Settings Showcase - Large centered layout -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="showcase-large reveal">
+        <div class="showcase-text">
+          <div class="showcase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </div>
+          <h3>Fully Customizable</h3>
+          <p>Tailor the app to your research workflow. Configure default search terms, preferred file types, download behavior, and automated snapshot scheduling. Control storage locations, concurrent download limits, and auto-run preferences.</p>
+        </div>
+        <div class="showcase-mockup">
+          <div class="showcase-desktop">
+            <div class="showcase-titlebar">
+              <span class="desktop-dot red"></span>
+              <span class="desktop-dot yellow"></span>
+              <span class="desktop-dot green"></span>
+            </div>
+            <div class="showcase-desktop-screen">
+              <img src="images/04-settings.png" alt="Settings" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Institutions -->
+  <section class="section section-light" id="institutions">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label label-gradient">Institutions</div>
+        <h2>Search 15+ government agencies</h2>
+        <p>Access publicly available documents from law enforcement, justice, intelligence, financial, and diplomatic sources.</p>
+      </div>
+      <div class="institution-strip reveal">
+        <span class="institution-pill active">FBI</span>
+        <span class="institution-pill">DEA</span>
+        <span class="institution-pill">US Marshals</span>
+        <span class="institution-pill">ICE</span>
+        <span class="institution-pill">ATF</span>
+        <span class="institution-pill">DOJ</span>
+        <span class="institution-pill">Federal Courts</span>
+        <span class="institution-pill">Supreme Court</span>
+        <span class="institution-pill">CourtListener</span>
+        <span class="institution-pill">CIA</span>
+        <span class="institution-pill">DNI</span>
+        <span class="institution-pill">NSA</span>
+        <span class="institution-pill">SEC</span>
+        <span class="institution-pill">FinCEN</span>
+        <span class="institution-pill">Treasury</span>
+        <span class="institution-pill">IRS</span>
+        <span class="institution-pill">State Dept</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specs -->
+  <section class="section section-darker" id="specs">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label label-gradient">Technical Specs</div>
+        <h2>Built for researchers</h2>
+        <p>A desktop application built with Flutter for macOS, Windows, and Linux. Local-first with SQLite storage.</p>
+      </div>
+      <div class="specs-grid">
+        <div class="spec-card reveal">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M20 15h2"/><path d="M9 2v2"/><path d="M9 20v2"/><path d="M2 9h2"/><path d="M20 9h2"/></svg>
+          </div>
+          <h3>Cross-Platform</h3>
+          <p>Native desktop app for macOS, Windows, and Linux. Built with Flutter for consistent experience.</p>
+        </div>
+        <div class="spec-card reveal reveal-d1">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3>SQLite Database</h3>
+          <p>Local storage for search history, artifacts, and settings. No cloud required, all data stays on your machine.</p>
+        </div>
+        <div class="spec-card reveal reveal-d2">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Privacy First</h3>
+          <p>Uses DuckDuckGo for privacy-focused searching. No tracking, no accounts, no data collection.</p>
+        </div>
+        <div class="spec-card reveal">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <h3>PDF Viewer</h3>
+          <p>Built-in Syncfusion PDF viewer with annotations. View documents without leaving the app.</p>
+        </div>
+        <div class="spec-card reveal reveal-d1">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <h3>Media Player</h3>
+          <p>Integrated media_kit player for audio and video files. Play MP3, MP4, WAV, and MOV directly.</p>
+        </div>
+        <div class="spec-card reveal reveal-d2">
+          <div class="spec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>Open Source</h3>
+          <p>MIT licensed, fully open source. Inspect the code, contribute, or fork for your own use.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-dark cta-section" id="download">
+    <div class="container">
+      <h2 class="reveal">Start exploring the archive</h2>
+      <p class="reveal reveal-d1">Free, open source, runs locally on macOS, Windows, and Linux. No account required.</p>
+      <div class="hero-buttons reveal reveal-d2">
+        <a href="https://github.com/BoltzmannEntropy/Zephaniah" class="btn-primary" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Get Started
+        </a>
+        <a href="https://github.com/BoltzmannEntropy/Zephaniah" class="btn-ghost" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+      <p class="hero-meta reveal reveal-d3" style="margin-top: 16px;">
+        <span>macOS &middot; Windows &middot; Linux &middot; MIT License</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <span class="footer-logo">Zephaniah</span>
+          <span class="footer-copy">&copy; 2026 Shlomo Kashani. All rights reserved. &middot; Made by Shlomo Kashani, Head of AI at <a href="https://qneura.ai/apps.html" style="color: var(--accent);">Qneura</a></span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="https://github.com/BoltzmannEntropy/Zephaniah" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#specs">Specs</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Mobile menu
+    const toggle = document.getElementById('mobileToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+</body>
+</html>
